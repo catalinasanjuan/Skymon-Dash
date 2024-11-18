@@ -1,0 +1,61 @@
+import pygame
+import sys
+
+ancho_ventana = 500
+alto_ventana = 500
+
+def main():
+    pygame.init()
+
+    # Configuración inicial de la ventana
+    ventana = pygame.display.set_mode((ancho_ventana, alto_ventana))
+    pygame.display.set_caption("avion desplazamiento")
+    reloj = pygame.time.Clock()
+
+    # Coordenadas iniciales del "avión"
+    xcuadrado = 400
+    ycuadrado = 200
+
+    corriendo = True
+
+    while corriendo:
+        reloj.tick(10)
+        
+        # Llenar el fondo
+        ventana.fill((195,247,126))
+
+        # Mover el "avión" automáticamente hacia la izquierda
+        xcuadrado -= 0
+
+        # Dibujar el "avión"
+        pygame.draw.rect(ventana, (255, 255, 255), pygame.Rect(xcuadrado, ycuadrado, 50, 50))
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                corriendo = False
+
+            if event.type == pygame.KEYDOWN:
+                tecla_presionada = pygame.key.name(event.key)
+
+                # Mover el "avión" con las teclas
+                if tecla_presionada == "w":
+                    ycuadrado -= 20
+                    print(tecla_presionada)
+                    
+                elif tecla_presionada == "a":
+                    xcuadrado -= 20
+                    print(tecla_presionada)
+                    
+                elif tecla_presionada == "s":
+                    ycuadrado += 20
+                    print(tecla_presionada)
+                    
+                elif tecla_presionada == "d":
+                    xcuadrado += 20
+                    print(tecla_presionada)
+
+                  # Imprimir la tecla presionada
+
+        pygame.display.flip()
+    sys.exit()
+main()
